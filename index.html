@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I-Sao – Gestion des apiculteurs d’Atsimo-Atsinanana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6faf1;
+  --surface: #ffffff;
+  --ink: #17301f;
+  --muted: #55695a;
+  --green: #1f6b3a;
+  --green-dark: #144a28;
+  --honey: #f2a516;
+  --honey-soft: #fde7b0;
+  --line: #cfdcc9;
+  --on-green: #ffffff;
+  --shadow: 0 12px 30px -12px rgba(23,48,31,.35);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1c13; --surface: #172a1d; --ink: #eaf3e6; --muted: #a3b8a8;
+    --green: #5fc07f; --green-dark: #3a9a5a; --honey: #f5b73a; --honey-soft: #3b2f10;
+    --line: #2b4332; --on-green: #0f1c13; --shadow: 0 12px 30px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1c13; --surface: #172a1d; --ink: #eaf3e6; --muted: #a3b8a8;
+  --green: #5fc07f; --green-dark: #3a9a5a; --honey: #f5b73a; --honey-soft: #3b2f10;
+  --line: #2b4332; --on-green: #0f1c13; --shadow: 0 12px 30px -12px rgba(0,0,0,.7);
+}
+html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Figtree", system-ui, sans-serif; font-size: 1.05rem; line-height: 1.6;
+}
+h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; line-height: 1.1; margin: 0; }
+
+/* Hero */
+.hero {
+  min-height: 100vh; min-height: 100svh;
+  display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 2rem;
+  max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem;
+}
+.hero h1 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800; letter-spacing: -0.02em; }
+.hero p { max-width: 46ch; color: var(--muted); font-size: 1.2rem; margin: 1.2rem 0 2rem; }
+.btn {
+  display: inline-block; text-decoration: none; cursor: pointer; border: 0;
+  background: var(--honey); color: #2a1c00; font: 600 1.15rem "Figtree", sans-serif;
+  padding: .9rem 1.8rem; border-radius: 999px; box-shadow: var(--shadow);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:focus-visible, input:focus-visible, .link:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.btn.green { background: var(--green); color: var(--on-green); width: 100%; margin-top: 1rem; }
+
+/* Honeycomb */
+.comb { position: relative; width: min(100%, 440px); aspect-ratio: 1; margin: 0 auto; }
+.hex {
+  position: absolute; width: 56%; aspect-ratio: 1 / 1.1547;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  display: grid; place-items: center;
+}
+.hex.main { left: 22%; top: 14%; background: var(--honey); font-size: clamp(4rem, 14vw, 7rem); z-index: 2; animation: float 5s ease-in-out infinite; }
+.hex.a { left: 0; top: 0; width: 34%; background: var(--green); opacity: .9; }
+.hex.b { right: 0; top: 42%; width: 40%; background: var(--honey-soft); }
+.hex.c { left: 6%; bottom: 0; width: 28%; background: var(--line); }
+@keyframes float { 50% { transform: translateY(-10px); } }
+
+/* Connexion */
+.connexion {
+  max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem 5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: stretch;
+}
+.intro, .login {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 2rem; box-shadow: var(--shadow);
+}
+.intro { border-left: 8px solid var(--honey); display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+.intro h2, .login h2 { font-size: 2rem; }
+.intro p { margin: 0; color: var(--muted); }
+.link { color: var(--green); font-weight: 600; }
+.login form { display: grid; gap: .4rem; margin-top: 1.2rem; }
+label { font-weight: 600; margin-top: .6rem; }
+input {
+  font: inherit; padding: .8rem 1rem; border-radius: 12px; border: 1.5px solid var(--line);
+  background: var(--bg); color: var(--ink); width: 100%;
+}
+input:focus { border-color: var(--green); }
+.msg { min-height: 1.5em; margin: .8rem 0 0; font-weight: 600; color: var(--green); }
+
+/* Icônes */
+svg.i { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.22em; margin-right: .45rem; }
+.field { position: relative; }
+.field .ico { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; margin: 0; color: var(--muted); pointer-events: none; }
+.field input { padding-left: 2.8rem; }
+.field input.pw { padding-right: 3.2rem; }
+.toggle { position: absolute; right: .4rem; top: 50%; transform: translateY(-50%); background: none; border: 0; cursor: pointer; color: var(--muted); padding: .45rem; border-radius: 10px; display: grid; place-items: center; }
+.toggle:hover { color: var(--green); }
+.toggle:focus-visible { outline: 3px solid var(--green); outline-offset: 1px; }
+.toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.toggle .off { display: none; }
+.toggle[aria-pressed="true"] .on { display: none; }
+.toggle[aria-pressed="true"] .off { display: block; }
+.tip { display: flow-root; min-height: 40px; }
+.badge { float: left; margin-right: .8rem; width: 40px; height: 40px; border-radius: 50%; background: var(--honey-soft); color: var(--green); display: grid; place-items: center; }
+.badge svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 800px) {
+  .hero, .connexion { grid-template-columns: 1fr; }
+  .hero { text-align: center; padding-top: 3rem; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .comb { order: -1; width: min(70%, 280px); }
+}
+</style>
+</head>
+<body>
+<header class="hero" id="landing">
+  <div>
+    <h1>Bienvenue sur I‑Sao</h1>
+    <p>La plateforme pour gérer les apiculteurs de la région Atsimo‑Atsinanana.</p>
+    <a class="btn" href="#conexion"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Se connecter</a>
+  </div>
+  <div class="comb" role="img" aria-label="Logo I-Sao : alvéoles de miel et abeille">
+    <div class="hex a"></div>
+    <div class="hex b"></div>
+    <div class="hex c"></div>
+    <!-- Remplacez 🐝 par <img src="logo-1.jpg" alt="Logo I-Sao" style="width:100%;height:100%;object-fit:cover"> sur votre site -->
+    <div class="hex main">🐝</div>
+  </div>
+</header>
+
+<main class="connexion" id="conexion">
+  <section class="intro">
+    <h2>Bienvenue sur I‑Sao</h2>
+    <p class="tip"><span class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M13 10h5M13 14h4"/></svg></span>Connectez‑vous avec votre matricule (IM) et votre mot de passe.</p>
+    <p class="tip"><span class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></span>Pas encore de compte ? <a class="link" href="#conexion">Inscrivez‑vous</a>.</p>
+  </section>
+  <section class="login">
+    <h2>Se connecter</h2>
+    <form id="form" novalidate>
+      <label for="im">Votre IM</label>
+      <div class="field">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input id="im" name="im" type="text" autocomplete="username" required>
+      </div>
+      <label for="mdp">Votre mot de passe</label>
+      <div class="field">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input class="pw" id="mdp" name="mdp" type="password" autocomplete="current-password" required>
+        <button type="button" class="toggle" id="toggle" aria-pressed="false" aria-label="Afficher le mot de passe">
+          <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+      <button class="btn green" type="submit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Se connecter</button>
+      <p class="msg" id="msg" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<script>
+var tg = document.getElementById('toggle');
+tg.addEventListener('click', function () {
+  var pw = document.getElementById('mdp');
+  var show = pw.type === 'password';
+  pw.type = show ? 'text' : 'password';
+  tg.setAttribute('aria-pressed', show);
+  tg.setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+});
+document.getElementById('form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var msg = document.getElementById('msg');
+  var ok = this.im.value.trim() && this.mdp.value;
+  msg.style.color = ok ? '' : '#c0392b';
+  msg.textContent = ok ? 'Connexion en cours…' : 'Veuillez renseigner votre IM et votre mot de passe.';
+});
+</script>
+</body>
+</html>
